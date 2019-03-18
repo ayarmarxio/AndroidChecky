@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "366441506264",
+    "firebase_url": "https://checky-edfdf.firebaseio.com",
+    "project_id": "checky-edfdf",
+    "storage_bucket": "checky-edfdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366441506264:android:27c429663a931322",
+        "android_client_info": {
+          "package_name": "com.example.checky"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366441506264-qv53gre2lv6g4sndea86vhqb9b389tbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_ZsrIK23JHHvXqnrOZDLiox_R1ftRw8c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
