@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Checky</string>
+    <string name="spinner_teacher">Choose your teacher</string>
+    <string name="spinner_course">Choose your course</string>
+    <string-array name="teacher_array">
+        <item>Faisal Jarkass</item>
+        <item>Jon Eikholm </item>
+        <item>Claus Teacher</item>
+    </string-array>
+    <string-array name="course_array">
+        <item>Android App Development</item>
+        <item>IOS Development</item>
+        <item>Python 1</item>
+    </string-array>
 </resources>
