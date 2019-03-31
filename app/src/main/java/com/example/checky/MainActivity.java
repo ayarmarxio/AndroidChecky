@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
                         }
+
                         else {
                             task.getResult().getUser();
                             Toast.makeText(MainActivity.this, "Could not Register... please try again", Toast.LENGTH_SHORT).show();

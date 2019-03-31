@@ -233,20 +233,25 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+
         if (buttonLogout == v){
             firebaseAuth.signOut();
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
+
         if (submitBtn == v) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference newRegistryRef = db.collection("registry").document();
-            Float average = GetAverage();
+            final Float average = GetAverage();
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
             Registry registry = new Registry();
+
             registry.setTeacherName(this.teacherName);
             registry.setCourseName(this.courseName);
             registry.setAverage(average);
+            registry.setRegistryId(newRegistryRef.getId());
             registry.setUserId(userId);
 
             newRegistryRef.set(registry).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -254,7 +259,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
                         sendEmail();
-                        Toast.makeText(getApplicationContext(), "Information Saved", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "You rated " +teacherName+ " with "+average+" percent.", Toast.LENGTH_LONG).show();
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Information Failed to Save", Toast.LENGTH_LONG).show();
@@ -332,22 +337,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Log.i("Send email", "");
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        String[] TO = {userEmail};
-        String[] CC = {"ayarmarxio@hotmail.com"};
+        String[] TO = {"ayarmarxio@hotmail.com"};
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.setType("text/plain");
 
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Rating done by: " + userEmail);
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "You have been rated in Checky App");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "You has been rated by CheckyApp");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Your student: " + userEmail + " has rated you with  " +average+ " in Checky App");
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            finish();
             Log.i("Finished sending email", "");
-        } catch (android.content.ActivityNotFoundException ex) {
+        }
+
+        catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(ProfileActivity.this,
                     "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
